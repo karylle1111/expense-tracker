@@ -1,6 +1,6 @@
-# Project: Expense Tracker | Installment 2: Talking to the User
+# Project: Expense Tracker | Installment 3: The Tracker Does Math
 # Author: Maboloc, Karylle B.
-# This program takes user input for expenses, calculates, and displays a summary.
+# This program takes user input, calculates a subtotal, tax, and budget remaining.
 
 print("=" * 40)
 print("            EXPENSE TRACKER        ")
@@ -17,23 +17,34 @@ print("[4] Exit                      (coming soon)")
 print()
 name = input("What's your name? ")
 print("Welcome,", name + "! Let's log two expenses.")
+subtotal = 0
 
 item1 = input("First expense? ")
 amount1 = float(input("Amount? "))
+subtotal += amount1
 
 item2 = input("Second expense? ")
 amount2 = float(input("Amount? "))
+subtotal += amount2
+average = subtotal / 2
 
-total = amount1 + amount2
-average = total / 2
+tax_percent = float(input("Tax rate %? "))
+budget = float(input("Your budget? "))
+tax = subtotal * (tax_percent / 100)
+total = subtotal + tax
+over_budget = total > budget
+left = budget - total
 
 print()
 print("-" * 40)
 print("SUMMARY")
-print("  -", item1 + ":     $", amount1)
-print("  -", item2 + ":      $", amount2)s
-print("Total spent:    $", total)
-print("Average:        $", average)
-
+print("  - ", item1, ":\t$", amount1, sep="")
+print("  - ", item2, ":\t$", amount2, sep="")
+print("Subtotal:\t$", subtotal, sep="")
+print("Average:\t$", average, sep="")
+print("Tax (", tax_percent, "%):\t$", tax, sep="")
+print("Grand total:\t$", total, sep="")
+print("Over budget?\t", over_budget, sep="")
+print("Left in budget:\t$", left, sep="")
 print("-" * 40)
-print("Made by: Karylle Maboloc  |  Installment 2")
+print("Made by: Karylle Maboloc  |  Installment 3")
