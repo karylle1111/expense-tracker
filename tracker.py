@@ -1,6 +1,6 @@
-# Project: Expense Tracker | Installment 3: The Tracker Does Math
+# Project: Expense Tracker | Installment 4: The Tracker Makes Decisions
 # Author: Maboloc, Karylle B.
-# This program takes user input, calculates a subtotal, tax, and budget remaining.
+# This program takes user input, calculates a subtotal, and makes budget decisions.
 
 print("=" * 40)
 print("            EXPENSE TRACKER        ")
@@ -17,23 +17,44 @@ print("[4] Exit                      (coming soon)")
 print()
 name = input("What's your name? ")
 print("Welcome,", name + "! Let's log two expenses.")
-subtotal = 0
 
+subtotal = 0
 item1 = input("First expense? ")
 amount1 = float(input("Amount? "))
+# Size message for item 1
+if amount1 > 200:
+    print("  Huge expense - are you sure?")
+elif amount1 > 100:
+    print("  Big expense.")
+elif amount1 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
 subtotal += amount1
 
 item2 = input("Second expense? ")
 amount2 = float(input("Amount? "))
+# Size message for item 2
+if amount2 > 200:
+    print("  Huge expense - are you sure?")
+elif amount2 > 100:
+    print("  Big expense.")
+elif amount2 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
 subtotal += amount2
-average = subtotal / 2
 
+# Two big warning
+if amount1 > 100 and amount2 > 100:
+    print("  Two big expenses in a row - slow down!")
+
+average = subtotal / 2
 tax_percent = float(input("Tax rate %? "))
 budget = float(input("Your budget? "))
 tax = subtotal * (tax_percent / 100)
 total = subtotal + tax
 over_budget = total > budget
-left = budget - total
 
 print()
 print("-" * 40)
@@ -44,7 +65,14 @@ print("Subtotal:\t$", subtotal, sep="")
 print("Average:\t$", average, sep="")
 print("Tax (", tax_percent, "%):\t$", tax, sep="")
 print("Grand total:\t$", total, sep="")
-print("Over budget?\t", over_budget, sep="")
-print("Left in budget:\t$", left, sep="")
+
+# The Verdict (No negative numbers allowed)
+if over_budget:
+    print("Over budget by $", total - budget, "!", sep="")
+elif total > (budget * 0.9):
+    print("Careful: only $", budget - total, " left.", sep="")
+else:
+    print("Within budget. $", budget - total, " left.", sep="")
+
 print("-" * 40)
-print("Made by: Karylle Maboloc  |  Installment 3")
+print("Made by: Karylle Maboloc  |  Installment 4")
