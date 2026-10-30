@@ -1,78 +1,71 @@
-# Project: Expense Tracker | Installment 4: The Tracker Makes Decisions
+# Project: Expense Tracker | Installment 5: The Menu Comes Alive
 # Author: Maboloc, Karylle B.
-# This program takes user input, calculates a subtotal, and makes budget decisions.
+# This program uses a while loop to make the menu functional.
 
 print("=" * 40)
 print("            EXPENSE TRACKER        ")
 print("        Know where your money goes.")
 print("=" * 40)
-
 print()
-print("MAIN MENU")
-print("[1] Add an expense            (coming soon)")
-print("[2] View all expenses         (coming soon)")
-print("[3] Show total spent          (coming soon)")
-print("[4] Exit                      (coming soon)")
 
-print()
 name = input("What's your name? ")
-print("Welcome,", name + "! Let's log two expenses.")
-
-subtotal = 0
-item1 = input("First expense? ")
-amount1 = float(input("Amount? "))
-# Size message for item 1
-if amount1 > 200:
-    print("  Huge expense - are you sure?")
-elif amount1 > 100:
-    print("  Big expense.")
-elif amount1 > 50:
-    print("  Moderate expense.")
-else:
-    print("  Small expense.")
-subtotal += amount1
-
-item2 = input("Second expense? ")
-amount2 = float(input("Amount? "))
-# Size message for item 2
-if amount2 > 200:
-    print("  Huge expense - are you sure?")
-elif amount2 > 100:
-    print("  Big expense.")
-elif amount2 > 50:
-    print("  Moderate expense.")
-else:
-    print("  Small expense.")
-subtotal += amount2
-
-# Two big warning
-if amount1 > 100 and amount2 > 100:
-    print("  Two big expenses in a row - slow down!")
-
-average = subtotal / 2
 tax_percent = float(input("Tax rate %? "))
 budget = float(input("Your budget? "))
-tax = subtotal * (tax_percent / 100)
-total = subtotal + tax
-over_budget = total > budget
 
-print()
-print("-" * 40)
-print("SUMMARY")
-print("  - ", item1, ":\t$", amount1, sep="")
-print("  - ", item2, ":\t$", amount2, sep="")
-print("Subtotal:\t$", subtotal, sep="")
-print("Average:\t$", average, sep="")
-print("Tax (", tax_percent, "%):\t$", tax, sep="")
-print("Grand total:\t$", total, sep="")
+print("Welcome, " + name + "!")
+subtotal = 0
+count = 0
 
-# The Verdict (No negative numbers allowed)
-if over_budget:
-    print("Over budget by $", total - budget, "!", sep="")
-elif total > (budget * 0.9):
-    print("Careful: only $", budget - total, " left.", sep="")
-else:
-    print("Within budget. $", budget - total, " left.", sep="")
-
-print("-" * 40)
-print("Made by: Karylle Maboloc  |  Installment 4")
+while True:
+    print()
+    print("MAIN MENU")
+    print("[1] Add an expense")
+    print("[2] View all expenses         (coming soon)")
+    print("[3] Show total spent")
+    print("[4] Exit")
+    
+    choice = input("Choose 1-4: ")
+    
+    if choice == "1":
+        amount = float(input("Amount? "))
+        subtotal += amount
+        count += 1
+        
+        if amount > 200:
+            print("Huge expense - are you sure?")
+        elif amount > 100:
+            print("Big expense.")
+        elif amount > 50:
+            print("Moderate expense.")
+        else:
+            print("Small expense.")
+            
+    elif choice == "2":
+        print("Coming soon: the tracker can't remember each item yet.")
+        
+    elif choice == "3":
+        tax = subtotal * (tax_percent / 100)
+        total = subtotal + tax
+        over_budget = total > budget
+        
+        print("Expenses:\t", count, sep="")
+        print("Subtotal:\t$", subtotal, sep="")
+        print("Tax (", tax_percent, "%):\t$", tax, sep="")
+        print("Grand total:\t$", total, sep="")
+        
+        if over_budget:
+            print("Over budget by $", total - budget, "!", sep="")
+        elif total > (budget * 0.9):
+            print("Careful: only $", budget - total, " left.", sep="")
+        else:
+            print("Within budget. $", budget - total, " left.", sep="")
+            
+    elif choice == "4":
+        print("Goodbye, " + name + "!")
+        print("-" * 40)
+        print("Made by: Karylle Maboloc  |  Installment 5")
+        print("=" * 40)
+        break
+        
+    else:
+        print("Please choose 1, 2, 3 or 4.")
